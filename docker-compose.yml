@@ -4,13 +4,13 @@ services:
     container_name: covoit-db
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: hello
-      POSTGRES_DB: CovoiturAFPAsave
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: CovoiturAfpa
       POSTGRES_TEMPLATE: template0
       POSTGRES_ENCODING: 'UTF8'
       POSTGRES_LOCALE: 'French_France.1252'
     ports:
-      - "5432:3307" 
+      - "5432:5432" 
     volumes:
       - ./db/:/docker-entrypoint-initdb.d/
     networks:
