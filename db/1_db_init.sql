@@ -292,16 +292,16 @@ INSERT INTO covoiturafpa.car_type VALUES (24, 'UTILITAIRE', 25.0, 4);
 INSERT INTO covoiturafpa.car_type VALUES (25, 'UTILITAIRE', 18.6, 5);
 
 
-INSERT INTO covoiturafpa.centre VALUES (28, 'Centre Afpa de Dunkerque', '407 Av. de la Gironde', 51.00609, 2.33884, '+33972723936', true);
+INSERT INTO covoiturafpa.centre VALUES (1, 'Centre Afpa de Dunkerque', '407 Av. de la Gironde', 51.00609, 2.33884, '+33972723936', true);
 
 
-INSERT INTO covoiturafpa.day_timetable VALUES (1, 'MONDAY', '09:00:00', '12:00:00', '13:00:00', '18:00:00', 28);
-INSERT INTO covoiturafpa.day_timetable VALUES (2, 'TUESDAY', '08:00:00', '12:00:00', '13:00:00', '18:00:00', 28);
-INSERT INTO covoiturafpa.day_timetable VALUES (3, 'WEDNESDAY', '08:00:00', '12:00:00', '13:00:00', '18:00:00', 28);
-INSERT INTO covoiturafpa.day_timetable VALUES (4, 'THURSDAY', '08:00:00', '12:00:00', '13:00:00', '18:00:00', 28);
-INSERT INTO covoiturafpa.day_timetable VALUES (5, 'FRIDAY', '08:00:00', '12:00:00', '13:00:00', '18:00:00', 28);
-INSERT INTO covoiturafpa.day_timetable VALUES (6, 'SATURDAY', NULL, NULL, NULL, NULL, 28);
-INSERT INTO covoiturafpa.day_timetable VALUES (7, 'SUNDAY', NULL, NULL, NULL, NULL, 28);
+INSERT INTO covoiturafpa.day_timetable VALUES (1, 'MONDAY', '09:00:00', '12:00:00', '13:00:00', '18:00:00', 1);
+INSERT INTO covoiturafpa.day_timetable VALUES (2, 'TUESDAY', '08:00:00', '12:00:00', '13:00:00', '18:00:00', 1);
+INSERT INTO covoiturafpa.day_timetable VALUES (3, 'WEDNESDAY', '08:00:00', '12:00:00', '13:00:00', '18:00:00', 1);
+INSERT INTO covoiturafpa.day_timetable VALUES (4, 'THURSDAY', '08:00:00', '12:00:00', '13:00:00', '18:00:00', 1);
+INSERT INTO covoiturafpa.day_timetable VALUES (5, 'FRIDAY', '08:00:00', '12:00:00', '13:00:00', '18:00:00', 1);
+INSERT INTO covoiturafpa.day_timetable VALUES (6, 'SATURDAY', NULL, NULL, NULL, NULL, 1);
+INSERT INTO covoiturafpa.day_timetable VALUES (7, 'SUNDAY', NULL, NULL, NULL, NULL, 1);
 
 
 INSERT INTO covoiturafpa.day_week VALUES (1, 'MONDAY');
@@ -313,31 +313,32 @@ INSERT INTO covoiturafpa.day_week VALUES (6, 'SATURDAY');
 INSERT INTO covoiturafpa.day_week VALUES (7, 'SUNDAY');
 
 
-INSERT INTO covoiturafpa.partner VALUES (1, 'Afaq_9001', 'Afaq_9001.png', 28);
-INSERT INTO covoiturafpa.partner VALUES (2, 'France Relance', 'france-relance.png', 28);
-INSERT INTO covoiturafpa.partner VALUES (3, 'fse', 'fse.jpg', 28);
-INSERT INTO covoiturafpa.partner VALUES (6, 'Synofdes', 'synofdes.png', 28);
-INSERT INTO covoiturafpa.partner VALUES (5, 'region Nouvelle-Aquitaine', 'region.jpg', 28);
-INSERT INTO covoiturafpa.partner VALUES (4, 'opqf', 'opqf.png', 28);
+INSERT INTO covoiturafpa.partner VALUES (1, 'Afaq_9001', 'Afaq_9001.png', 1);
+INSERT INTO covoiturafpa.partner VALUES (2, 'France Relance', 'france-relance.png', 1);
+INSERT INTO covoiturafpa.partner VALUES (3, 'fse', 'fse.jpg', 1);
+INSERT INTO covoiturafpa.partner VALUES (6, 'Synofdes', 'synofdes.png', 1);
+INSERT INTO covoiturafpa.partner VALUES (5, 'region Nouvelle-Aquitaine', 'region.jpg', 1);
+INSERT INTO covoiturafpa.partner VALUES (4, 'opqf', 'opqf.png', 1);
 
 INSERT INTO covoiturafpa.person VALUES (1,'admin@admin.com',
 '$2a$10$HN6dEs1e1PewsSoiM7iOauwPq8UeA1ra6OPX11p1H421poM9CE1mG',
-'Jean',
-'Biche',
+'ADMIN',
+'ADMIN',
 '0606606060',
 true,
 false,
 false,
 null,
 null,
-'T',
+'E',
 '2025-03-04',
-'2025-03-06'
+'2100-01-01'
 );
-INSERT INTO covoiturafpa.formation VALUES (1,'CDA',28);
-INSERT INTO covoiturafpa.employee VALUES (1,true,28,true);
+INSERT INTO covoiturafpa.formation VALUES (1,'CDA',1);
+INSERT INTO covoiturafpa.employee VALUES (1,true,1,true);
 INSERT INTO covoiturafpa.teacher_of values (1,1);
-UPDATE covoiturafpa.person set person_type ='E' where id_person=1;
+
+-- UPDATE covoiturafpa.person set person_type ='E' where id_person=1;
 
 
 
@@ -386,3 +387,20 @@ GRANT ALL ON TABLE covoiturafpa.teacher_of TO "afpaUser";
 
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA covoiturafpa TO "afpaUser";
 GRANT EXECUTE ON FUNCTION covoiturafpa.get_distance(float8, float8, float8, float8) TO "afpaUser";
+
+
+CREATE OR REPLACE FUNCTION covoiturafpa.prevent_delete_update()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF OLD.id_person = 1 THEN
+        RAISE EXCEPTION 'SUPER ADMIN cannot be deleted';
+    END IF;
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER prevent_delete_update_trigger
+BEFORE DELETE OR UPDATE ON covoiturafpa.person
+FOR EACH ROW
+EXECUTE PROCEDURE covoiturafpa.prevent_delete_update();
