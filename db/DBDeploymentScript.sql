@@ -19,7 +19,6 @@ CREATE user adminTest WITH LOGIN PASSWORD 'test';
 ALTER SCHEMA covoiturafpa OWNER TO adminTest;
 
 
-
 -- TYPE
 CREATE TYPE covoiturafpa.car_type_name AS ENUM (
     'COMPACT',
@@ -320,6 +319,26 @@ INSERT INTO covoiturafpa.partner VALUES (3, 'fse', 'fse.jpg', 28);
 INSERT INTO covoiturafpa.partner VALUES (6, 'Synofdes', 'synofdes.png', 28);
 INSERT INTO covoiturafpa.partner VALUES (5, 'region Nouvelle-Aquitaine', 'region.jpg', 28);
 INSERT INTO covoiturafpa.partner VALUES (4, 'opqf', 'opqf.png', 28);
+
+INSERT INTO covoiturafpa.person VALUES (1,'admin@admin.com',
+'$2a$10$HN6dEs1e1PewsSoiM7iOauwPq8UeA1ra6OPX11p1H421poM9CE1mG',
+'Jean',
+'Biche',
+'0606606060',
+true,
+false,
+false,
+null,
+null,
+'T',
+'2025-03-04',
+'2025-03-06'
+);
+INSERT INTO covoiturafpa.formation VALUES (1,'CDA',28);
+INSERT INTO covoiturafpa.employee VALUES (1,true,28,true);
+INSERT INTO covoiturafpa.teacher_of values (1,1);
+UPDATE covoiturafpa.person set person_type ='E' where id_person=1;
+
 
 
 CREATE extension cube SCHEMA covoiturafpa;
