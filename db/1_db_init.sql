@@ -337,7 +337,8 @@ null,
 INSERT INTO covoiturafpa.formation VALUES (1,'CDA',1);
 INSERT INTO covoiturafpa.employee VALUES (1,true,1,true);
 INSERT INTO covoiturafpa.teacher_of values (1,1);
-
+INSERT INTO covoiturafpa.car VALUES (1, 'Super Admin Car', 4, 7.3, 1, 1);
+SELECT pg_catalog.setval('covoiturafpa.person_id_person_seq', 1, true);
 -- UPDATE covoiturafpa.person set person_type ='E' where id_person=1;
 
 
