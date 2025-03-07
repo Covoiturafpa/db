@@ -6,4 +6,3 @@ email : admin@admin.com
 mot de passe : admin
 
 mot de passe base de donnée : test
-

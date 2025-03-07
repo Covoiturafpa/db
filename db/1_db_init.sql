@@ -208,7 +208,7 @@ CREATE TABLE covoiturafpa.recurring_days (
     id_day_week integer NOT NULL,
     PRIMARY KEY (id_ride, id_day_week),
     FOREIGN KEY (id_day_week) REFERENCES covoiturafpa.day_week(id_day_week),
-    FOREIGN KEY (id_ride) REFERENCES covoiturafpa.recurring(id_ride)
+    FOREIGN KEY (id_ride) REFERENCES covoiturafpa.recurring(id_ride) ON DELETE CASCADE
 );
 
 CREATE TABLE covoiturafpa.ride_passenger (
@@ -259,90 +259,6 @@ ALTER TABLE covoiturafpa.ride_passenger OWNER TO adminTest;
 ALTER TABLE covoiturafpa.teacher_of OWNER TO adminTest;
 ALTER TABLE covoiturafpa.trainee OWNER TO adminTest;
 
-INSERT INTO covoiturafpa.fuel VALUES (1, 'ESSENCE', 1.82);
-INSERT INTO covoiturafpa.fuel VALUES (2, 'ESSENCE SUPERTHANOL', 0.82);
-INSERT INTO covoiturafpa.fuel VALUES (3, 'GAZOLE', 1.82);
-INSERT INTO covoiturafpa.fuel VALUES (4, ' ELECTRIQUE', 0.17);
-INSERT INTO covoiturafpa.fuel VALUES (5, 'GPL', 0.87);
-
-INSERT INTO covoiturafpa.car_type VALUES (1, 'COMPACT', 7.3, 1);
-INSERT INTO covoiturafpa.car_type VALUES (2, 'COMPACT', 7.3, 2);
-INSERT INTO covoiturafpa.car_type VALUES (3, 'COMPACT', 5.2, 3);
-INSERT INTO covoiturafpa.car_type VALUES (4, 'COMPACT', 7.8, 4);
-INSERT INTO covoiturafpa.car_type VALUES (5, 'COMPACT', 9.5, 5);
-INSERT INTO covoiturafpa.car_type VALUES (6, 'BERLINE', 7.5, 1);
-INSERT INTO covoiturafpa.car_type VALUES (7, 'BERLINE', 7.5, 2);
-INSERT INTO covoiturafpa.car_type VALUES (8, 'BERLINE', 6.8, 3);
-INSERT INTO covoiturafpa.car_type VALUES (9, 'BERLINE', 15.6, 4);
-INSERT INTO covoiturafpa.car_type VALUES (10, 'BERLINE', 12.2, 5);
-INSERT INTO covoiturafpa.car_type VALUES (11, 'SUV', 8.0, 1);
-INSERT INTO covoiturafpa.car_type VALUES (12, 'SUV', 8.0, 2);
-INSERT INTO covoiturafpa.car_type VALUES (13, 'SUV', 7.2, 3);
-INSERT INTO covoiturafpa.car_type VALUES (14, 'SUV', 16.0, 4);
-INSERT INTO covoiturafpa.car_type VALUES (15, 'SUV', 16.0, 5);
-INSERT INTO covoiturafpa.car_type VALUES (16, 'MONOSPACE', 7.0, 1);
-INSERT INTO covoiturafpa.car_type VALUES (17, 'MONOSPACE', 7.0, 2);
-INSERT INTO covoiturafpa.car_type VALUES (18, 'MONOSPACE', 6.2, 3);
-INSERT INTO covoiturafpa.car_type VALUES (19, 'MONOSPACE', 15.6, 4);
-INSERT INTO covoiturafpa.car_type VALUES (20, 'MONOSPACE', 10.5, 5);
-INSERT INTO covoiturafpa.car_type VALUES (21, 'UTILITAIRE', 14.3, 3);
-INSERT INTO covoiturafpa.car_type VALUES (22, 'UTILITAIRE', 14.3, 2);
-INSERT INTO covoiturafpa.car_type VALUES (23, 'UTILITAIRE', 11.6, 3);
-INSERT INTO covoiturafpa.car_type VALUES (24, 'UTILITAIRE', 25.0, 4);
-INSERT INTO covoiturafpa.car_type VALUES (25, 'UTILITAIRE', 18.6, 5);
-
-
-INSERT INTO covoiturafpa.centre VALUES (1, 'Centre Afpa de Dunkerque', '407 Av. de la Gironde', 51.00609, 2.33884, '+33972723936', true);
-
-
-INSERT INTO covoiturafpa.day_timetable VALUES (1, 'MONDAY', '09:00:00', '12:00:00', '13:00:00', '18:00:00', 1);
-INSERT INTO covoiturafpa.day_timetable VALUES (2, 'TUESDAY', '08:00:00', '12:00:00', '13:00:00', '18:00:00', 1);
-INSERT INTO covoiturafpa.day_timetable VALUES (3, 'WEDNESDAY', '08:00:00', '12:00:00', '13:00:00', '18:00:00', 1);
-INSERT INTO covoiturafpa.day_timetable VALUES (4, 'THURSDAY', '08:00:00', '12:00:00', '13:00:00', '18:00:00', 1);
-INSERT INTO covoiturafpa.day_timetable VALUES (5, 'FRIDAY', '08:00:00', '12:00:00', '13:00:00', '18:00:00', 1);
-INSERT INTO covoiturafpa.day_timetable VALUES (6, 'SATURDAY', NULL, NULL, NULL, NULL, 1);
-INSERT INTO covoiturafpa.day_timetable VALUES (7, 'SUNDAY', NULL, NULL, NULL, NULL, 1);
-
-
-INSERT INTO covoiturafpa.day_week VALUES (1, 'MONDAY');
-INSERT INTO covoiturafpa.day_week VALUES (2, 'TUESDAY');
-INSERT INTO covoiturafpa.day_week VALUES (3, 'WEDNESDAY');
-INSERT INTO covoiturafpa.day_week VALUES (4, 'THURSDAY');
-INSERT INTO covoiturafpa.day_week VALUES (5, 'FRIDAY');
-INSERT INTO covoiturafpa.day_week VALUES (6, 'SATURDAY');
-INSERT INTO covoiturafpa.day_week VALUES (7, 'SUNDAY');
-
-
-INSERT INTO covoiturafpa.partner VALUES (1, 'Afaq_9001', 'Afaq_9001.png', 1);
-INSERT INTO covoiturafpa.partner VALUES (2, 'France Relance', 'france-relance.png', 1);
-INSERT INTO covoiturafpa.partner VALUES (3, 'fse', 'fse.jpg', 1);
-INSERT INTO covoiturafpa.partner VALUES (6, 'Synofdes', 'synofdes.png', 1);
-INSERT INTO covoiturafpa.partner VALUES (5, 'region Nouvelle-Aquitaine', 'region.jpg', 1);
-INSERT INTO covoiturafpa.partner VALUES (4, 'opqf', 'opqf.png', 1);
-
-INSERT INTO covoiturafpa.person VALUES (1,'admin@admin.com',
-'$2a$10$HN6dEs1e1PewsSoiM7iOauwPq8UeA1ra6OPX11p1H421poM9CE1mG',
-'ADMIN',
-'ADMIN',
-'0606606060',
-true,
-false,
-false,
-null,
-null,
-'E',
-'2025-03-04',
-'2100-01-01'
-);
-INSERT INTO covoiturafpa.formation VALUES (1,'CDA',1);
-INSERT INTO covoiturafpa.employee VALUES (1,true,1,true);
-INSERT INTO covoiturafpa.teacher_of values (1,1);
-INSERT INTO covoiturafpa.car VALUES (1, 'Super Admin Car', 4, 7.3, 1, 1);
-SELECT pg_catalog.setval('covoiturafpa.person_id_person_seq', 1, true);
--- UPDATE covoiturafpa.person set person_type ='E' where id_person=1;
-
-
-
 CREATE extension cube SCHEMA covoiturafpa;
 CREATE extension earthdistance SCHEMA covoiturafpa;
 
@@ -352,56 +268,8 @@ LANGUAGE sql
 IMMUTABLE STRICT
 RETURN covoiturafpa.earth_distance(covoiturafpa.ll_to_earth(latitude_1, longitude_1), covoiturafpa.ll_to_earth(latitude_2, longitude_2)) / 1000;
 
-CREATE ROLE "afpaUser" WITH
-	LOGIN
-	NOSUPERUSER
-	NOCREATEDB
-	NOCREATEROLE
-	INHERIT
-	NOREPLICATION
-	CONNECTION LIMIT -1
-	PASSWORD 'Afpa4apfA!';
-COMMENT ON ROLE "afpaUser" IS 'Classic User for covoiturafpa';
-
-GRANT USAGE ON SCHEMA covoiturafpa TO "afpaUser";
-
-GRANT ALL ON TABLE covoiturafpa.car TO "afpaUser";
-GRANT ALL ON TABLE covoiturafpa.car_type TO "afpaUser";
-GRANT ALL ON TABLE covoiturafpa.centre TO "afpaUser";
-GRANT ALL ON TABLE covoiturafpa.city TO "afpaUser";
-GRANT ALL ON TABLE covoiturafpa.day_timetable TO "afpaUser";
-GRANT ALL ON TABLE covoiturafpa.destination TO "afpaUser";
-GRANT ALL ON TABLE covoiturafpa.employee TO "afpaUser";
-GRANT ALL ON TABLE covoiturafpa.formation TO "afpaUser";
-GRANT ALL ON TABLE covoiturafpa.fuel TO "afpaUser";
-GRANT ALL ON TABLE covoiturafpa.notification TO "afpaUser";
-GRANT ALL ON TABLE covoiturafpa.one_time TO "afpaUser";
-GRANT ALL ON TABLE covoiturafpa.partner TO "afpaUser";
-GRANT ALL ON TABLE covoiturafpa.person TO "afpaUser";
-GRANT ALL ON TABLE covoiturafpa.recurring TO "afpaUser";
-GRANT ALL ON TABLE covoiturafpa.ride TO "afpaUser";
-GRANT ALL ON TABLE covoiturafpa.ride_passenger TO "afpaUser";
-GRANT ALL ON TABLE covoiturafpa.trainee TO "afpaUser";
-GRANT ALL ON TABLE covoiturafpa.day_week TO "afpaUser";
-GRANT ALL ON TABLE covoiturafpa.recurring_days TO "afpaUser";
-GRANT ALL ON TABLE covoiturafpa.teacher_of TO "afpaUser";
-
-GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA covoiturafpa TO "afpaUser";
-GRANT EXECUTE ON FUNCTION covoiturafpa.get_distance(float8, float8, float8, float8) TO "afpaUser";
 
 
-CREATE OR REPLACE FUNCTION covoiturafpa.prevent_delete_update()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF OLD.id_person = 1 THEN
-        RAISE EXCEPTION 'SUPER ADMIN cannot be deleted';
-    END IF;
-    RETURN OLD;
-END;
-$$ LANGUAGE plpgsql;
 
 
-CREATE TRIGGER prevent_delete_update_trigger
-BEFORE DELETE OR UPDATE ON covoiturafpa.person
-FOR EACH ROW
-EXECUTE PROCEDURE covoiturafpa.prevent_delete_update();
+
