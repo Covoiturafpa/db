@@ -28,7 +28,7 @@ BEGIN
     IF OLD.id_person = 1 THEN
         RAISE EXCEPTION 'SUPER ADMIN cannot be deleted';
     END IF;
-    RETURN OLD;
+    RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
