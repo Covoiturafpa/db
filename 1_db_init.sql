@@ -27,7 +27,7 @@ CREATE TYPE covoiturafpa.car_type_name AS ENUM (
     'MONOSPACE',
     'UTILITAIRE'
 );
-
+-- aled
 CREATE TYPE covoiturafpa.day_name AS ENUM (
     'MONDAY',
     'TUESDAY',
